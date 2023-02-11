@@ -10,25 +10,13 @@
               <h2 class="card-title">Performance</h2>
             </div>
             <div class="col-sm-6 d-flex d-sm-block">
-              <div
-                class="btn-group btn-group-toggle"
-                :class="isRTL ? 'float-left' : 'float-right'"
-                data-toggle="buttons"
-              >
-                <label
-                  v-for="(option, index) in bigLineChartCategories"
-                  :key="option.name"
-                  class="btn btn-sm btn-primary btn-simple"
-                  :class="{ active: bigLineChart.activeIndex === index }"
-                  :id="index"
-                >
-                  <input
-                    type="radio"
-                    @click="initBigChart(index)"
-                    name="options"
-                    autocomplete="off"
-                    :checked="bigLineChart.activeIndex === index"
-                  />
+              <div class="btn-group btn-group-toggle" :class="isRTL ? 'float-left' : 'float-right'"
+                data-toggle="buttons">
+                <label v-for="(option, index) in bigLineChartCategories" :key="option.name"
+                  class="btn btn-sm btn-primary btn-simple" :class="{ active: bigLineChart.activeIndex === index }"
+                  :id="index">
+                  <input type="radio" @click="initBigChart(index)" name="options" autocomplete="off"
+                    :checked="bigLineChart.activeIndex === index" />
                   <span class="d-none d-sm-block">{{ option.name }}</span>
                   <span class="d-block d-sm-none">
                     <i :class="option.icon"></i>
@@ -39,14 +27,9 @@
           </div>
         </template>
         <div class="chart-area">
-          <line-chart
-            style="height: 100%"
-            ref="bigChart"
-            :chart-data="bigLineChart.chartData"
-            :gradient-colors="bigLineChart.gradientColors"
-            :gradient-stops="bigLineChart.gradientStops"
-            :extra-options="bigLineChart.extraOptions"
-          >
+          <line-chart style="height: 100%" ref="bigChart" :chart-data="bigLineChart.chartData"
+            :gradient-colors="bigLineChart.gradientColors" :gradient-stops="bigLineChart.gradientStops"
+            :extra-options="bigLineChart.extraOptions">
           </line-chart>
         </div>
       </card>
@@ -63,13 +46,9 @@
           </h3>
         </template>
         <div class="chart-area">
-          <line-chart
-            style="height: 100%"
-            :chart-data="purpleLineChart.chartData"
-            :gradient-colors="purpleLineChart.gradientColors"
-            :gradient-stops="purpleLineChart.gradientStops"
-            :extra-options="purpleLineChart.extraOptions"
-          >
+          <line-chart style="height: 100%" :chart-data="purpleLineChart.chartData"
+            :gradient-colors="purpleLineChart.gradientColors" :gradient-stops="purpleLineChart.gradientStops"
+            :extra-options="purpleLineChart.extraOptions">
           </line-chart>
         </div>
       </card>
@@ -83,12 +62,8 @@
           </h3>
         </template>
         <div class="chart-area">
-          <bar-chart
-            style="height: 100%"
-            :chart-data="blueBarChart.chartData"
-            :gradient-stops="blueBarChart.gradientStops"
-            :extra-options="blueBarChart.extraOptions"
-          >
+          <bar-chart style="height: 100%" :chart-data="blueBarChart.chartData"
+            :gradient-stops="blueBarChart.gradientStops" :extra-options="blueBarChart.extraOptions">
           </bar-chart>
         </div>
       </card>
@@ -102,12 +77,8 @@
           </h3>
         </template>
         <div class="chart-area">
-          <line-chart
-            style="height: 100%"
-            :chart-data="greenLineChart.chartData"
-            :gradient-stops="greenLineChart.gradientStops"
-            :extra-options="greenLineChart.extraOptions"
-          >
+          <line-chart style="height: 100%" :chart-data="greenLineChart.chartData"
+            :gradient-stops="greenLineChart.gradientStops" :extra-options="greenLineChart.extraOptions">
           </line-chart>
         </div>
       </card>
@@ -118,12 +89,7 @@
           <h6 class="title d-inline">Tasks (5)</h6>
           <p class="card-category d-inline">Today</p>
 
-          <base-dropdown
-            menu-on-right=""
-            tag="div"
-            title-classes="btn btn-link btn-icon"
-            class="float-right"
-          >
+          <base-dropdown menu-on-right="" tag="div" title-classes="btn btn-link btn-icon" class="float-right">
             <i slot="title" class="tim-icons icon-settings-gear-63"></i>
             <a class="dropdown-item" href="#pablo"> Action </a>
             <a class="dropdown-item" href="#pablo"> Another action </a>
@@ -139,32 +105,11 @@
       <card card-body-classes="table-full-width">
         <h4 slot="header" class="card-title">Striped table</h4>
         <el-table :data="tableData">
-          <el-table-column
-            min-width="150"
-            sortable
-            label="Name"
-            property="name"
-          ></el-table-column>
-          <el-table-column
-            min-width="150"
-            sortable
-            label="Country"
-            property="country"
-          ></el-table-column>
-          <el-table-column
-            min-width="150"
-            sortable
-            label="City"
-            property="city"
-          ></el-table-column>
-          <el-table-column
-            min-width="150"
-            sortable
-            align="right"
-            header-align="right"
-            label="Salary"
-            property="salary"
-          ></el-table-column>
+          <el-table-column min-width="150" sortable label="Name" property="name"></el-table-column>
+          <el-table-column min-width="150" sortable label="Country" property="country"></el-table-column>
+          <el-table-column min-width="150" sortable label="City" property="city"></el-table-column>
+          <el-table-column min-width="150" sortable align="right" header-align="right" label="Salary"
+            property="salary"></el-table-column>
         </el-table>
       </card>
     </div>
@@ -200,6 +145,7 @@ let bigChartDatasetOptions = {
 }
 
 export default {
+  middleware: 'authentication',
   name: 'dashboard',
   components: {
     LineChart,
@@ -371,4 +317,6 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+
+</style>

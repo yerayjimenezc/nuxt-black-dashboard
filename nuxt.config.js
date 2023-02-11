@@ -1,23 +1,9 @@
-/*!
 
- =========================================================
- * Nuxt Black Dashboard - v1.1.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/nuxt-black-dashboard
- * Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
- * Coded by Creative Tim
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
 export default {
-  mode: "universal",
-  /*
-   ** Headers of the page
-   */
+  ssr: false,
+
+  // Target: https://go.nuxtjs.dev/config-target
+  target: 'static',
   head: {
     title: "Nuxt Black Dashboard",
     meta: [
@@ -96,7 +82,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
+    extend (config, ctx) { },
     babel: {
       plugins: [
         [
