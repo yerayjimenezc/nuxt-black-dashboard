@@ -2,9 +2,10 @@
   "name": "nuxt-black-dashboard",
   "version": "1.1.0",
   "description": "Nuxt Black Dashboard",
-  "author": "creativetim",
+  "author": "",
   "private": true,
   "scripts": {
+    "starter": "$setNODE_OPTIONS=--openssl-legacy-provider",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
