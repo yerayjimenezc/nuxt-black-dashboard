@@ -1,34 +1,32 @@
 <template>
-    <card>
+    <div class="container-fluid">
         <card>
             <h1 class="card-title">Registro de usuarios</h1>
-            <form>
-                <label>Usuario:</label>
-                <input type="text" placeholder="nombre de usuario" v-model="user">
-                <label>password:</label>
-                <input type="text" placeholder="****************" v-model="password">
-                <label>Role:</label>
-                <select v-model="role" class="form-select">
-                    <option value="user">user</option>
-                    <option value="admin">admin</option>
-                </select>
-                <button type="button" @click="register">Registrar</button>
+            <form class="m-3">
+                <label class="row form-label">Usuario:
+                    <input class="form-control" type="text" placeholder="nombre de usuario" v-model="user"></label>
+                <label class="row form-label">password:
+                    <input class="form-control" type="text" placeholder="****************" v-model="password"></label>
+                <label class="row form-label">Role:
+                    <select class="custom-select" v-model="role" aria-label="Elige un role de usuario">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </label>
             </form>
+            <button class="mt-2 btn btn-primary w-100" type="button" @click="register">Registrar</button>
         </card>
         <card>
             <h1 class="card-title">Login de usuarios</h1>
-            <form>
-                <label>Usuario:</label>
-                <input type="text" placeholder="nombre de usuario" v-model="user">
-                <label>password:</label>
-                <input type="text" placeholder="****************" v-model="password">
-                <button type="button" @click="login">Login</button>
+            <form class="m-3">
+                <label class="row form-label">Usuario:
+                    <input class="form-control" type="text" placeholder="nombre de usuario" v-model="user"></label>
+                <label class="row form-label">password:
+                    <input class="form-control" type="text" placeholder="****************" v-model="password"></label>
             </form>
+            <button class="mt-2 btn btn-primary w-100" type="button" @click="login">Login</button>
         </card>
-        <p>{{ token }}</p>
-        <p>{{ userToken }}</p>
-        <pre>{{ users }}</pre>
-    </card>
+    </div>
 </template>
 
 <script>
