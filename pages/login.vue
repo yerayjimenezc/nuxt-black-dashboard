@@ -1,8 +1,5 @@
 <template>
     <card>
-        <h1>Soy un login</h1>
-        <button class="btn btn-secundary" @click="login">LogIn</button>
-        <button class="btn btn-secundary" @click="logout">LogOut</button>
         <card>
             <h1 class="card-title">Registro de usuarios</h1>
             <form>
@@ -18,6 +15,19 @@
                 <button type="button" @click="register">Registrar</button>
             </form>
         </card>
+        <card>
+            <h1 class="card-title">Login de usuarios</h1>
+            <form>
+                <label>Usuario:</label>
+                <input type="text" placeholder="nombre de usuario" v-model="user">
+                <label>password:</label>
+                <input type="text" placeholder="****************" v-model="password">
+                <button type="button" @click="login">Login</button>
+            </form>
+        </card>
+        <p>{{ token }}</p>
+        <p>{{ userToken }}</p>
+        <pre>{{ users }}</pre>
     </card>
 </template>
 
@@ -33,15 +43,36 @@ export default {
     data () {
         return {
             isLoggedIn: false,
+            users: null,
             user: '',
             password: '',
-            role: ''
+            role: '',
+            token: null,
+            userToken: null
         }
     },
+    async mounted () {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'auth-token': token
+        };
+        const { data } = await localAPI.get('/users', { headers });
+        console.log(data)
+        this.users = data
+    },
     methods: {
-        login () {
-            localStorage.setItem('isLoggedIn', true)
-            this.$router.push('/')
+        async login () {
+            try {
+                const sendData = { name: this.user, password: this.password }
+                const { data } = await localAPI.post("/login", sendData);
+                console.log(data)
+                localStorage.setItem('token', data.data.token)
+                localStorage.setItem('user', data.data.user)
+                localStorage.setItem('role', data.data.role)
+            } catch (error) {
+                console.error(error)
+                return false
+            }
         },
         logout () {
             localStorage.removeItem('isLoggedIn')
@@ -50,8 +81,10 @@ export default {
             try {
                 const sendData = { name: this.user, password: this.password, role: this.role }
                 const { data } = await localAPI.post("/register", sendData);
-                localStorage.setItem(data)
                 console.log(data)
+                localStorage.setItem('token', data.data.token)
+                localStorage.setItem('user', data.data.user)
+                localStorage.setItem('role', data.data.role)
             } catch (error) {
                 console.error(error)
                 return false
