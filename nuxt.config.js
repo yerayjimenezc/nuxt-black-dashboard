@@ -16,6 +16,10 @@ export default {
       },
     ],
     link: [
+      {
+        rel: 'stylesheet',
+        href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css'
+      },
       { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
       {
         rel: "stylesheet",
@@ -64,11 +68,7 @@ export default {
       {
         code: "en",
         file: "en.js",
-      },
-      {
-        code: "ar",
-        file: "ar.js",
-      },
+      }
     ],
     lazy: true,
     langDir: "lang/",

@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <card>
+        <card v-if="isLoggedIn">
             <h1 class="card-title">Registro de usuarios</h1>
             <form class="m-3">
                 <label class="row form-label">Usuario:
@@ -36,7 +36,6 @@ const localAPI = axios.create({
 })
 export default {
     components: {
-
     },
     data () {
         return {
@@ -50,30 +49,29 @@ export default {
         }
     },
     async mounted () {
-        const token = localStorage.getItem('token');
-        const headers = {
-            'auth-token': token
-        };
-        const { data } = await localAPI.get('/users', { headers });
-        console.log(data)
-        this.users = data
+        // const token = localStorage.getItem('token');
+        // const headers = {
+        //     'auth-token': token
+        // };
+        // const { data } = await localAPI.get('/users', { headers });
+        // console.log(data)
+        // this.users = data
     },
     methods: {
         async login () {
             try {
                 const sendData = { name: this.user, password: this.password }
                 const { data } = await localAPI.post("/login", sendData);
-                console.log(data)
                 localStorage.setItem('token', data.data.token)
                 localStorage.setItem('user', data.data.user)
                 localStorage.setItem('role', data.data.role)
+                this.isLoggedIn = true
+                this.user = ''
+                this.password = ''
             } catch (error) {
                 console.error(error)
                 return false
             }
-        },
-        logout () {
-            localStorage.removeItem('isLoggedIn')
         },
         async register () {
             try {
