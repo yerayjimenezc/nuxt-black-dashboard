@@ -26,7 +26,7 @@
             </form>
             <button class="mt-2 btn btn-primary w-100" type="button" @click="login">Login</button>
         </card>
-    </div>
+</div>
 </template>
 
 <script>
@@ -49,6 +49,8 @@ export default {
         }
     },
     async mounted () {
+        this.isLoggedIn = localStorage.getItem('role') === 'admin' ? true : false
+        console.log(localStorage.getItem('role'))
         // const token = localStorage.getItem('token');
         // const headers = {
         //     'auth-token': token
@@ -65,9 +67,10 @@ export default {
                 localStorage.setItem('token', data.data.token)
                 localStorage.setItem('user', data.data.user)
                 localStorage.setItem('role', data.data.role)
-                this.isLoggedIn = true
+                this.isLoggedIn = data.data.role === 'admin' ? true : false
                 this.user = ''
                 this.password = ''
+                this.$router.push('/')
             } catch (error) {
                 console.error(error)
                 return false
@@ -75,12 +78,19 @@ export default {
         },
         async register () {
             try {
-                const sendData = { name: this.user, password: this.password, role: this.role }
-                const { data } = await localAPI.post("/register", sendData);
-                console.log(data)
-                localStorage.setItem('token', data.data.token)
-                localStorage.setItem('user', data.data.user)
+                const token = localStorage.getItem('token');
+                const body = {
+                    'name': this.user,
+                    'password': this.password,
+                    'role': this.role,
+                    'token': token
+                }
+                const { data } = await localAPI.post("/register", body);
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('user', data.data.name)
                 localStorage.setItem('role', data.data.role)
+                this.user = ''
+                this.password = ''
             } catch (error) {
                 console.error(error)
                 return false

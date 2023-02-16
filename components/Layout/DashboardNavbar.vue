@@ -29,7 +29,6 @@
 
       <base-dropdown tag="li" :menu-on-right="!$rtl.isRTL" title-tag="a" title-classes="nav-link" class="nav-item">
         <template slot="title">
-          <div class="notification d-none d-lg-block d-xl-block"></div>
           <i class="tim-icons icon-sound-wave"></i>
           <p class="d-lg-none">Nuevas notificaciones</p>
         </template>
@@ -37,7 +36,6 @@
       <base-dropdown tag="li" :menu-on-right="!$rtl.isRTL" title-tag="a" class="nav-item" title-classes="nav-link"
         menu-classes="dropdown-navbar">
         <template slot="title">
-          <div class="notification d-none d-lg-block d-xl-block"></div>
           <i class="bi bi-box-arrow-left"></i>
           <a class="d-lg-none" href="/login" @click="localStorage.clear()">
             <p>Cerrar Sesión</p>
