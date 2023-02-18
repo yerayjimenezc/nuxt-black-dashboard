@@ -1,53 +1,30 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
-    <side-bar :background-color="sidebarBackground" :short-title="$t('sidebar.shortTitle')"
-      :title="$t('sidebar.title')">
+    <side-bar :background-color="sidebarBackground" short-title="CGC DTB" title="Cugranca Distribución">
       <template slot-scope="props" slot="links">
         <sidebar-item :link="{
-          name: $t('sidebar.dashboard'),
-          icon: 'tim-icons icon-chart-pie-36',
+          name: 'Pedidos',
+          icon: 'bi bi-box-seam',
           path: '/'
         }">
         </sidebar-item>
         <sidebar-item :link="{
-          name: $t('sidebar.icons'),
-          icon: 'tim-icons icon-atom',
-          path: '/icons'
+          name: 'Clientes',
+          icon: 'bi bi-person-video2',
+          path: '/clientes'
         }">
         </sidebar-item>
         <sidebar-item :link="{
-          name: $t('sidebar.maps'),
-          icon: 'tim-icons icon-pin',
-          path: '/google'
+          name: 'productos',
+          icon: 'bi bi-tags',
+          path: '/productos'
         }">
         </sidebar-item>
-        <sidebar-item :link="{
-          name: $t('sidebar.notifications'),
-          icon: 'tim-icons icon-bell-55',
-          path: '/notifications'
-        }">
-        </sidebar-item>
-        <sidebar-item :link="{
-          name: $t('sidebar.userProfile'),
-          icon: 'tim-icons icon-single-02',
-          path: '/user'
-        }">
-        </sidebar-item>
-        <sidebar-item :link="{
-          name: $t('sidebar.regularTables'),
-          icon: 'tim-icons icon-puzzle-10',
-          path: '/regular'
-        }"></sidebar-item>
-        <sidebar-item :link="{
-          name: $t('sidebar.typography'),
-          icon: 'tim-icons icon-align-center',
-          path: '/typography'
-        }"></sidebar-item>
       </template>
     </side-bar>
     <!--Share plugin (for demo purposes). You can remove it if don't plan on using it-->
-    <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share>
+    <!-- <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share> -->
     <div class="main-panel" :data="sidebarBackground">
       <dashboard-navbar></dashboard-navbar>
       <router-view name="header"></router-view>
@@ -60,7 +37,7 @@
       </div>
       <content-footer v-if="!isFullScreenRoute"></content-footer>
     </div>
-  </div>
+</div>
 </template>
 <script>
 /* eslint-disable no-new */

@@ -4,34 +4,21 @@
       <slot name="brand"></slot>
 
       <slot name="toggle-button">
-        <button
-          class="navbar-toggler collapsed"
-          v-if="hasMenu"
-          type="button"
-          @click="toggleMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler collapsed" v-if="hasMenu" type="button" @click="toggleMenu" aria-expanded="false"
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-bar navbar-kebab"></span>
           <span class="navbar-toggler-bar navbar-kebab"></span>
           <span class="navbar-toggler-bar navbar-kebab"></span>
         </button>
       </slot>
 
-      <CollapseTransition
-        @after-leave="onTransitionEnd"
-        @before-enter="onTransitionStart"
-      >
-        <div
-          class="collapse navbar-collapse show"
-          :class="menuClasses"
-          v-show="show"
-        >
+      <CollapseTransition @after-leave="onTransitionEnd" @before-enter="onTransitionStart">
+        <div class="collapse navbar-collapse show" :class="menuClasses" v-show="show">
           <slot></slot>
         </div>
       </CollapseTransition>
     </div>
-  </nav>
+</nav>
 </template>
 <script>
 import { CollapseTransition } from 'vue2-transitions';
@@ -70,7 +57,7 @@ export default {
     type: {
       type: String,
       default: 'white',
-      validator(value) {
+      validator (value) {
         return [
           'dark',
           'success',
@@ -92,13 +79,13 @@ export default {
   components: {
     CollapseTransition
   },
-  data() {
+  data () {
     return {
       transitionFinished: true
     };
   },
   computed: {
-    classes() {
+    classes () {
       let color = `bg-${this.type}`;
       let classes = [
         { 'navbar-transparent': !this.show && this.transparent },
@@ -116,18 +103,18 @@ export default {
       }
       return classes;
     },
-    hasMenu() {
+    hasMenu () {
       return this.$slots.default;
     }
   },
   methods: {
-    toggleMenu() {
+    toggleMenu () {
       this.$emit('change', !this.show);
     },
-    onTransitionStart() {
+    onTransitionStart () {
       this.transitionFinished = false;
     },
-    onTransitionEnd() {
+    onTransitionEnd () {
       this.transitionFinished = true;
     }
   }

@@ -1,32 +1,13 @@
 <template>
-  <component
-    :is="baseComponent"
-    :to="link.path ? link.path : '/'"
-    :class="{ active: isActive }"
-    tag="li"
-  >
-    <a
-      v-if="isMenu"
-      class="sidebar-menu-item"
-      :aria-expanded="!collapsed"
-      data-toggle="collapse"
-      @click.prevent="collapseMenu"
-    >
-      
+  <component :is="baseComponent" :to="link.path ? link.path : '/'" :class="{ active: isActive }" tag="li">
+    <a v-if="isMenu" class="sidebar-menu-item" :aria-expanded="!collapsed" data-toggle="collapse"
+      @click.prevent="collapseMenu">
+
     </a>
 
-    <slot
-      name="title"
-      v-if="children.length === 0 && !$slots.default && link.path"
-    >
-      <component
-        :to="link.path"
-        @click.native="linkClick"
-        :is="elementType(link, false)"
-        :class="{ active: link.active }"
-        :target="link.target"
-        :href="link.path"
-      >
+    <slot name="title" v-if="children.length === 0 && !$slots.default && link.path">
+      <component :to="link.path" @click.native="linkClick" :is="elementType(link, false)" :class="{ active: link.active }"
+        :target="link.target" :href="link.path">
         <template v-if="addLink">
           <span class="sidebar-normal">{{ link.name }}</span>
         </template>
@@ -36,7 +17,7 @@
         </template>
       </component>
     </slot>
-  </component>
+</component>
 </template>
 <script>
 import { CollapseTransition } from 'vue2-transitions';
@@ -66,7 +47,7 @@ export default {
         'Sidebar link. Can contain name, path, icon and other attributes. See examples for more info'
     }
   },
-  provide() {
+  provide () {
     return {
       addLink: this.addChild,
       removeLink: this.removeChild
@@ -79,29 +60,29 @@ export default {
       default: true
     }
   },
-  data() {
+  data () {
     return {
       children: [],
       collapsed: true
     };
   },
   computed: {
-    baseComponent() {
+    baseComponent () {
       return this.isMenu || this.link.isRoute ? 'li' : 'nuxt-link';
     },
-    linkPrefix() {
+    linkPrefix () {
       if (this.link.name) {
         let words = this.link.name.split(' ');
         return words.map(word => word.substring(0, 1)).join('');
       }
     },
-    isMenu() {
+    isMenu () {
       if (!this.$slots.default) {
         return false
       }
       return this.$slots.default.some(item => item.tag.endsWith('sidebar-item'))
     },
-    isActive() {
+    isActive () {
       if (this.$route && this.$route.path) {
         let matchingRoute = this.children.find(c =>
           this.$route.path.startsWith(c.link.path)
@@ -114,27 +95,27 @@ export default {
     }
   },
   methods: {
-    addChild(item) {
+    addChild (item) {
       const index = this.$slots.default.indexOf(item.$vnode);
       this.children.splice(index, 0, item);
     },
-    removeChild(item) {
+    removeChild (item) {
       const tabs = this.children;
       const index = tabs.indexOf(item);
       tabs.splice(index, 1);
     },
-    elementType(link, isParent = true) {
+    elementType (link, isParent = true) {
       if (link.isRoute === false) {
         return isParent ? 'li' : 'a';
       } else {
         return 'nuxt-link';
       }
     },
-    linkAbbreviation(name) {
+    linkAbbreviation (name) {
       const matches = name.match(/\b(\w)/g);
       return matches.join('');
     },
-    linkClick() {
+    linkClick () {
       if (
         this.autoClose &&
         this.$sidebar &&
@@ -143,14 +124,14 @@ export default {
         this.$sidebar.displaySidebar(false);
       }
     },
-    collapseMenu() {
+    collapseMenu () {
       this.collapsed = !this.collapsed;
     },
-    collapseSubMenu(link) {
+    collapseSubMenu (link) {
       link.collapsed = !link.collapsed;
     }
   },
-  mounted() {
+  mounted () {
     if (this.addLink) {
       this.addLink(this);
     }
@@ -161,7 +142,7 @@ export default {
       this.collapsed = false;
     }
   },
-  destroyed() {
+  destroyed () {
     if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }

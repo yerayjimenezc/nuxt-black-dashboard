@@ -2,26 +2,22 @@
   <div class="sidebar" :data="backgroundColor">
     <div class="sidebar-wrapper" ref="sidebarScrollArea">
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <img :src="logo" alt="app-logo" />
+        <a href="#" class="simple-text logo-mini bg-transparent">
+          <img src="../../static/img/paqueterialogowhite.svg" alt="app-logo" />
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="#" class="simple-text logo-normal">
           {{ title }}
         </a>
       </div>
       <slot></slot>
       <ul class="nav">
         <slot name="links">
-          <sidebar-item
-            v-for="(link, index) in sidebarLinks"
-            :key="link.name + index"
-            :link="link"
-          >
+          <sidebar-item v-for="(link, index) in sidebarLinks" :key="link.name + index" :link="link">
           </sidebar-item>
         </slot>
       </ul>
     </div>
-  </div>
+</div>
 </template>
 <script>
 export default {
@@ -29,17 +25,17 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Creative Tim',
+      default: 'Cugranca Distribuciones',
       description: 'Sidebar title'
     },
     shortTitle: {
       type: String,
-      default: 'CT',
+      default: 'CD',
       description: 'Sidebar short title'
     },
     logo: {
       type: String,
-      default: 'http://demos.creative-tim.com/nuxt-black-dashboard-pro/img/icon-nuxt.svg',
+      default: '../../static/img/paqueterialogowhite.svg',
       description: 'Sidebar app logo'
     },
     backgroundColor: {
@@ -71,12 +67,12 @@ export default {
         'Whether sidebar should autoclose on mobile when clicking an item'
     }
   },
-  provide() {
+  provide () {
     return {
       autoClose: this.autoClose
     };
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.$sidebar.showSidebar) {
       this.$sidebar.showSidebar = false;
     }
@@ -85,6 +81,7 @@ export default {
 </script>
 <style>
 @media (min-width: 992px) {
+
   .navbar-search-form-mobile,
   .nav-mobile-menu {
     display: none;
