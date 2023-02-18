@@ -13,12 +13,12 @@
       </slot>
 
       <CollapseTransition @after-leave="onTransitionEnd" @before-enter="onTransitionStart">
-        <div class="collapse navbar-collapse show" :class="menuClasses" v-show="show">
+        <div class="collapse navbar-collapse show " :class="menuClasses" v-show="show">
           <slot></slot>
         </div>
       </CollapseTransition>
     </div>
-</nav>
+  </nav>
 </template>
 <script>
 import { CollapseTransition } from 'vue2-transitions';
@@ -120,4 +120,8 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+.top-wrapper {
+  background-color: #1e1e2f;
+}
+</style>

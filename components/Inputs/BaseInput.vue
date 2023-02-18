@@ -1,31 +1,23 @@
 <template>
-  <div
-    class="form-group"
-    :class="{
-      'input-group-focus': focused,
-      'has-danger': error,
-      'has-success': !error && touched,
-      'has-label': label,
-      'has-icon': hasIcon,
-    }"
-  >
+  <div class="form-group" :class="{
+    'input-group-focus': focused,
+    'has-danger': error,
+    'has-success': !error && touched,
+    'has-label': label,
+    'has-icon': hasIcon,
+  }">
     <slot name="label">
       <label v-if="label"> {{ label }} {{ required ? '*' : '' }} </label>
     </slot>
-    <div class="mb-0" :class="{'input-group': hasIcon}">
+    <div class="mb-0" :class="{ 'input-group': hasIcon }">
       <slot name="addonLeft">
         <span v-if="addonLeftIcon" class="input-group-prepend">
           <div class="input-group-text"><i :class="addonLeftIcon"></i></div>
         </span>
       </slot>
       <slot>
-        <input
-          :value="value"
-          v-bind="$attrs"
-          v-on="listeners"
-          class="form-control"
-          aria-describedby="addon-right addon-left"
-        />
+        <input :value="value" v-bind="$attrs" v-on="listeners" class="form-control"
+          aria-describedby="addon-right addon-left" required />
       </slot>
       <slot name="addonRight">
         <span v-if="addonRightIcon" class="input-group-append">
@@ -72,31 +64,31 @@ export default {
     prop: 'value',
     event: 'input'
   },
-  data() {
+  data () {
     return {
       focused: false,
       touched: false
     };
   },
   computed: {
-    hasIcon() {
+    hasIcon () {
       return this.hasLeftAddon || this.hasRightAddon
     },
-    hasLeftAddon() {
+    hasLeftAddon () {
       const { addonLeft } = this.$slots;
       return (
         addonLeft !== undefined ||
         this.addonLeftIcon !== undefined
       );
     },
-    hasRightAddon() {
+    hasRightAddon () {
       const { addonRight } = this.$slots;
       return (
         addonRight !== undefined ||
         this.addonRightIcon !== undefined
       );
     },
-    listeners() {
+    listeners () {
       return {
         ...this.$listeners,
         input: this.onInput,
@@ -106,17 +98,17 @@ export default {
     }
   },
   methods: {
-    onInput(evt) {
+    onInput (evt) {
       if (!this.touched) {
         this.touched = true;
       }
       this.$emit('input', evt.target.value);
     },
-    onFocus(evt) {
+    onFocus (evt) {
       this.focused = true;
       this.$emit('focus', evt)
     },
-    onBlur(evt) {
+    onBlur (evt) {
       this.focused = false;
       this.$emit('blur', evt)
     }

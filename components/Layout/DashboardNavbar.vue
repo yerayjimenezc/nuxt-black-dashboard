@@ -12,43 +12,28 @@
     </div>
 
     <ul class="navbar-nav" :class="$rtl.isRTL ? 'mr-auto' : 'ml-auto'">
-      <div class="search-bar input-group" @click="searchModalVisible = true">
-        <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
-          <i class="tim-icons icon-zoom-split"></i>
-        </button>
-        <!-- You can choose types of search input -->
-      </div>
-      <modal :show.sync="searchModalVisible" class="modal-search" id="searchModal" :centered="false" :show-close="true">
-        <input slot="header" v-model="searchQuery" type="text" class="form-control" id="inlineFormInputGroup"
-          placeholder="SEARCH" />
-      </modal>
+      <!-- <div class="search-bar input-group" @click="searchModalVisible = true">
+                                      <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
+                                        <i class="tim-icons icon-zoom-split"></i>
+                                      </button>
+                                    </div>
+                                    <modal :show.sync="searchModalVisible" class="modal-search" id="searchModal" :centered="false" :show-close="true">
+                                      <input slot="header" v-model="searchQuery" type="text" class="form-control" id="inlineFormInputGroup"
+                                        placeholder="SEARCH" />
+                                    </modal> -->
 
       <!-- <nav-item tag="li" title-classes="nav-link" class="nav-item mb-5" menu-classes="dropdown-navbar">
-        <a class="navbar-brand ml-xl-3 ml-5" href="/">Cerrar Sesión</a>
-      </nav-item> -->
-
-      <base-dropdown tag="li" :menu-on-right="!$rtl.isRTL" title-tag="a" title-classes="nav-link" class="nav-item">
-        <template slot="title">
-          <i class="tim-icons icon-sound-wave"></i>
-          <p class="d-lg-none">Nuevas notificaciones</p>
-        </template>
-      </base-dropdown>
-      <base-dropdown tag="li" :menu-on-right="!$rtl.isRTL" title-tag="a" class="nav-item" title-classes="nav-link"
-        menu-classes="dropdown-navbar">
-        <template slot="title">
-          <i class="bi bi-box-arrow-left"></i>
-          <a class="d-lg-none" href="/login" @click="localStorage.clear()">
-            <p>Cerrar Sesión</p>
-          </a>
-        </template>
-      </base-dropdown>
+                                                                                                                            <a class="navbar-brand ml-xl-3 ml-5" href="/">Cerrar Sesión</a>
+                                                                                                                          </nav-item> -->
+      <a href="/" @click="cleanStorage">
+        <li><i class="bi bi-box-arrow-left "></i></li>
+      </a>
     </ul>
   </base-nav>
 </template>
 <script>
 import { CollapseTransition } from 'vue2-transitions'
 import { BaseNav, Modal, BaseNavItem } from '@/components'
-
 export default {
   components: {
     CollapseTransition,
@@ -66,7 +51,7 @@ export default {
       return parts.map(p => this.capitalizeFirstLetter(p)).join(' ');
     },
     isRTL () {
-      return this.$rtl.isRTL;
+      return false;
     }
   },
   data () {
@@ -93,6 +78,10 @@ export default {
     },
     toggleMenu () {
       this.showMenu = !this.showMenu;
+    },
+    cleanStorage () {
+      this.localStorage.clear()
+      this.$router.push({ path: "/" });
     }
   }
 };
